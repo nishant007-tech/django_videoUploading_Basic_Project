@@ -1,0 +1,32 @@
+
+  form{
+       width:33%;
+       font-size: 110%;
+       margin: auto;
+       }
+  #name{
+          border: 2px solid grey;
+           border-radius: 5px;
+          background-color:azure;
+           padding: 5px 15px;
+      }
+      #name2{
+          border: 2px solid grey;
+           border-radius: 5px;
+          background-color:azure;
+         padding: 5px 15px;
+      }
+   #buttn{
+          color: white;
+          border: 2px solid grey;
+          border-radius: 5px;
+          background-color:#26ab44;
+          padding: 3px;
+          font-family:cursive;
+          margin: 20px auto;
+          width: 107px;
+      }
+      body {
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+  }

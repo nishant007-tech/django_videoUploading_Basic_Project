@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<style>
+.container3{
+    display:block;
+    margin:auto;
+    text-align:center;
+    margin-top:10px;
+    }
+
+.container5{
+    margin-top:60px;
+    font-size:20px;
+    display:flex;
+    flex-wrap:wrap;
+}
+.container6{
+    display: inline-block;
+    margin: initial;
+    border: 2px solid grey;
+    border-radius:10px;
+    margin-bottom: 33px;
+    margin-left: 7%;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+}
+
+</style>
+{% endblock %}
+
+{% block title%}
+Watch_playist
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}}" role="alert">
+    {{message}}
+</div>
+  {% endfor %}
+  {% endif %}
+{% if request.user.is_superuser %}
+<div class="container3">
+  <h5>Upload Your Videos Here!</h5>
+  <div class="bt">
+  <a href="{% url 'upload_video' %}">
+    <button  class="btn btn-primary">Upload </button>
+  </a>
+  </div>
+</div>
+{% endif %}
+
+ {% comment %} video uploadin {% endcomment %}
+<div class="container5">
+        {% for item in v_video %}
+        <div class=container6>
+          <b>Title</b>:{{item.title_of_video}}
+            {% if user.is_superuser %}
+          <p><i style="color:red; font-size:14px">Delete Video</i><a href="{% url 'remove_post' item.id %}" ><button class="btn"><i class="fa fa-trash"></i></button></a></p>
+          {% endif %}
+          <div>
+            <video width='500' controls>
+            <source src='{{ item.videofile.url }}' type='video/mp4'>
+            Your browser does not support the video tag.
+            </video>
+            </div>
+        <div class="container7"> 
+            <b>Description:</b><p style="width:520px; font-size:16px" >{{item.video_desp}}</p>
+            <p style="color:green">{{item.pubdate}}</p>
+        </div>
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}

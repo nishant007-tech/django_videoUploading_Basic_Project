@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head%}
+<link rel="stylesheet" , href="{% static 'login.css' %}">
+{% endblock%}
+
+{% block title %}
+ Login
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}}" role="alert">
+    {{message}}
+</div>
+  {% endfor %}
+  {% endif %}
+
+<form  method="post" action="">
+    {% csrf_token %}
+    <h1 style="font-family:comic sans ms;"> Welcome</h1>
+    <p> Enter username and password to login!</p>   <br>
+    <label for="name"> Username</label>
+    <div>
+    <input id="name" name="eml" size="30" type="email" placeholder="email..">
+    </div>
+    <label for="name2"> Password*</label>
+    <div>
+     <input size="30" name="pas" id="name2" type="password" placeholder="Password..">
+    </div>
+    <div>
+    <button id="buttn" ><strong>Login</strong></button>
+    </div>
+    <hr>
+
+</form>
+ 
+{% endblock %}

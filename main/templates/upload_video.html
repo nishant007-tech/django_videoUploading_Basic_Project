@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+ .container4{
+        display:block;
+        margin:auto;
+        width:70%;
+        margin-top:20px;
+    }
+</style>
+{% endblock %}
+
+{% block title%}
+Watch_playist
+{% endblock %}
+
+{% block content %}
+<div class="container4" >
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="fname">Video_Title</label>
+    <div class="col-sm-10">
+    <input type="text" class="form-control" id="fname" placeholder="Enter video title" name="vtitle">
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="comment">Video_Description</label>
+    <div class="col-sm-10">
+    <textarea class="form-control" rows="5" id="comment" name="vdesp"> </textarea>
+    </div>
+</div>
+<div class="form-group">
+<label for="myfile">  Select files:</label>
+    <div class="col-sm-10">
+      <input type="file" id="myfile" name="myfile" multiple>
+    </div>
+</div> 
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</div>
+</from>
+</div>
+{% endblock %}
