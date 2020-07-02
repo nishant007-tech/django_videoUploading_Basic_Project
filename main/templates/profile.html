@@ -43,7 +43,9 @@ Profile
         <div class="media-body">
           <h2 class="account-heading">{{ user.first_name }}</h2>
           <p class="para">{{ user.username }}</p>
-
+          <a href="{% url 'c_password' %}">
+            <button  class="btn btn-primary">Change Password</button>
+          </a>
       <form class="form-horizontal" method="post" enctype="multipart/form-data">
          {% csrf_token %}
           <fieldset>

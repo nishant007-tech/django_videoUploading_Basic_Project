@@ -24,7 +24,7 @@ class Contact(models.Model):
 class Playlist(models.Model):
     title = models.CharField(max_length=400,blank=False)
     desp = models.TextField(blank=False)
-    pubdate = models.DateField(auto_now_add=True)
+    pubdates = models.DateField(auto_now_add=True)
     
     def __str__(self):
         return '%s' %(self.title)
@@ -34,8 +34,16 @@ class Video(models.Model):
     video_desp = models.TextField(blank=True)
     videofile = models.FileField(upload_to='videos/', null=True)
     pubdate = models.DateField(auto_now_add=True)
-    playlist = models.OneToOneField(Playlist, on_delete=models.CASCADE, null=True)
+    playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
  
     def __str__(self):
         return '%s' %(self.title_of_video)
     
+class Demovideo(models.Model):
+    title_demo = models.CharField(max_length=500)
+    demo_desp = models.TextField(blank=True)
+    videofiles = models.FileField(upload_to='demovideos/', null=True)
+    publishdate = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s' %(self.title_demo)

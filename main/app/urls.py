@@ -13,4 +13,7 @@ urlpatterns = [
     path('upload_video/', views.upload_video, name='upload_video'),
     path('remove_post/<int:id>/', views.remove_post, name='remove_post'),
     path('remove_playlist/<int:id>/', views.remove_playlist, name='remove_playlist'),
+    path('change_password', views.c_password, name='c_password'),
+    path('upload_demo/', views.upload_demo, name='upload_demo'),
+     path('remove_demo/<int:id>/', views.remove_demo, name='remove_demo'),
 ]

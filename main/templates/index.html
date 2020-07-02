@@ -20,6 +20,25 @@
         width:74%;
         margin-top:20px;
     }
+    .container15{
+    margin-top:60px;
+    font-size:20px;
+    display:flex;
+    flex-wrap:wrap;
+}
+.container16{
+    display: inline-block;
+    margin: initial;
+    border: 2px solid grey;
+    border-radius:10px;
+    margin-bottom: 33px;
+    margin-left: 7%;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+}
+.container11{
+    margin-top: 20px;
+    text-align:center;
+    }
 </style>
 
  {% endblock %}
@@ -103,10 +122,10 @@
   <div class="card-body">
     <h5 class="card-title"><i><b> {{ item.title }}</b> </i> </h5>
     <p class="card-text">{{ item.desp }}</p>
-    <a href="{%url 'see_playlist'%}" class="btn btn-primary">Watch_Playlist</a>
+    <a href="{%url 'see_playlist' %}" class="btn btn-primary">Watch_Playlist</a>
   </div>
   <div class="card-footer text-dark bg-success">
-    {{ item.pubdate }}
+    {{ item.pubdates }}
   </div>
 </div>
 </div>
@@ -120,4 +139,42 @@ If You have already Paid for the course so wait for while, Admin Giving You the 
 </div>
 </div>
 {% endif %}
+
+
+
+<div class="container11">
+  <div>
+  <strong><i>Demo Videos</i></strong>
+  </div>
+  {% if request.user.is_superuser %}
+  <div>
+  <a href="{% url 'upload_demo' %}">
+    <button  class="btn btn-danger">Upload Demo_Videos </button>
+  </a>
+  </div>
+  {% endif %}
+</div> 
+
+  <div class="container15">
+    {% for demo in demo_video %}
+    <div class=container16>
+      <b>Title</b>:{{demo.title_demo}}
+        {% if user.is_superuser %}
+      <p><i style="color:red; font-size:14px">Delete Video</i><a href="{% url 'remove_demo' demo.id %}" ><button class="btn"><i class="fa fa-trash"></i></button></a></p>
+      {% endif %}
+      <div>
+        <video width='500' controls>
+        <source src='{{ demo.videofiles.url }}' type='video/mp4'>
+        Your browser does not support the video tag.
+        </video>
+        </div>
+    <div class="container7"> 
+        <b>Description:</b><p style="width:520px; font-size:16px" >{{demo.demo_desp}}</p>
+        <p style="color:green">{{demo.publishdate}}</p>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+
+
 {% endblock %}

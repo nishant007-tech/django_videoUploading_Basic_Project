@@ -1,15 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
-from .models import Profile , Contact ,Playlist, Video
+from .models import Profile , Contact ,Playlist, Video, Demovideo
 from django.contrib.auth import logout
-from .forms import Profileupdateform
+from .forms import Profileupdateform, Videoform
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 
 def index(request):
-    v_play= Playlist.objects.order_by('-pubdate')
-    return render(request, 'index.html', {'v_play':v_play})
+    demo_video = Demovideo.objects.order_by('-publishdate')
+    v_play= Playlist.objects.order_by('-pubdates')
+    return render(request, 'index.html', {
+        'v_play':v_play,
+        'demo_video':demo_video,
+        })
 
 
 def login(request):
@@ -100,13 +106,13 @@ def see_playlist(request):
 
 def upload_video(request):
     if request.method == 'POST':
-        vtitle =request.POST['vtitle']
-        vdesp =request.POST['vdesp']
-        myfile =request.FILES['myfile']
-        w_video = Video(title_of_video=vtitle, video_desp=vdesp, videofile=myfile)
-        w_video.save()
-        return redirect("see_playlist")
-    return render(request, 'upload_video.html')
+        w_form = Videoform(request.POST, request.FILES)
+        if w_form.is_valid():
+            w_form.save()
+            return redirect("see_playlist")
+    else:
+        w_form= w_form = Videoform(request.POST, request.FILES)
+    return render(request, 'upload_video.html',{'w_form':w_form})
 
 def remove_post(request,id):
     d_post= Video.objects.get(id=id)
@@ -118,4 +124,35 @@ def remove_playlist(request,id):
     d_play= Playlist.objects.get(id=id)
     messages.success(request, 'You have successfully deleted your Playlist.')
     d_play.delete()
+    return redirect('index')
+
+
+def c_password(request):
+    if request.method == 'POST':
+        c_form = PasswordChangeForm(request.user, request.POST)
+        if c_form.is_valid():
+            user = c_form.save()
+            update_session_auth_hash(request, user) 
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('c_password')
+        else:
+            messages.error(request, 'Something went wrong!!')
+    else:
+        c_form = PasswordChangeForm(request.user)
+    return render(request, 'c_password.html', {'c_form':c_form})
+
+def upload_demo(request):
+    if request.method == 'POST':
+        vttl =request.POST['vttl']
+        vdsp =request.POST['vdsp']
+        mfile =request.FILES['mfile']
+        demo_video = Demovideo(title_demo=vttl, demo_desp=vdsp, videofiles=mfile)
+        demo_video.save()
+        return redirect("index")
+    return render(request, 'video_demo.html')
+
+def remove_demo(request,id):
+    del_post= Demovideo.objects.get(id=id)
+    messages.success(request, 'You have successfully deleted your Video.')
+    del_post.delete()
     return redirect('index')

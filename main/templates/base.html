@@ -1,23 +1,28 @@
 {% load static%}
 <html lang="en">
   <head>
-     {% block head %}
-
-    {% endblock %}
+{% block head %}
+  <style>
+    
+  </style>  
+{% endblock %}
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">   -->
     <title>{% block title%} {% endblock %} | webs</title>
   </head>
   <body>
   
 {% if user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/"><b>Web Home</b></a>
+    <div>
+      <img style="width: 81px; height: 40px; margin-right: 9px; border-radius: 50%; " src={% static 'images/logo.jpg' %} />
+    </div>
+  <a class="navbar-brand " href="/"> <b>Web Home</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -44,6 +49,9 @@
  </nav>
 {% else %}
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div>
+    <img style="width: 81px; height: 40px; margin-right: 9px; border-radius: 50%; " src={% static 'images/logo.jpg' %} />
+  </div>
   <a class="navbar-brand " href="/"> <b>Web Home</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
